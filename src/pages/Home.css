@@ -1,0 +1,17 @@
+.Home {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    grid-row-gap: 10px;
+    grid-template-areas:
+        "graph"
+        "table";
+}
+
+.Home-graph {
+    grid-area: graph
+}
+
+.Home-table {
+    grid-area: table
+}

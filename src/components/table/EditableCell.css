@@ -1,0 +1,12 @@
+.EditableCell-input {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    width: 100%;
+    background-color: inherit;
+    padding: 8px;
+}
+
+.EditableCell-td {
+    padding: 0 !important; /* thanks bootstrap */
+}
