@@ -26,6 +26,6 @@ ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
 
 
-//loading animation
+/* Todo */
 // input validation
 // tests ?

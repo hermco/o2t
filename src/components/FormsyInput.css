@@ -1,0 +1,15 @@
+.Formsy-input{
+    padding: 0;
+    margin: 0;
+    border: 0;
+    width: 100%;
+    background-color: inherit;
+    padding: 8px;
+}
+
+.Formsy-input-error {
+    outline: 0; /* Disable default browser border coloration */
+    border-color: #ea0a0a;
+    background: #ffe3e0;
+    box-shadow: 0 0 0 0.6px red;
+}

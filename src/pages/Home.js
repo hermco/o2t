@@ -1,6 +1,7 @@
 import React from 'react';
 import Graph from '../components/Graph';
 import Table from '../components/Table';
+import ReactLoading from 'react-loading';
 import "./Home.css";
 
 const API_URL = "http://127.0.0.1:8000/?count=";
@@ -14,6 +15,7 @@ export default class Home extends React.Component
 
         this.state = {
             data: {},
+            nbFetched: 0,
             isLoading: false,
             error: null,
         };
@@ -41,21 +43,19 @@ export default class Home extends React.Component
     {
 
         /* convert the array fetched into an object to have easy access through an id (timestamp for us) */
-        const arrayToObject = (array, keyField) =>
-            array.reduce((obj, item) =>
-            {
-                //if it already existed in our old data
-                if (this.state.data.hasOwnProperty(item[keyField]))
-                    obj[item[keyField]] = this.state.data[item[keyField]]; //return the previous object with this timestamp
-                //else just get the new data
-                else
-                    obj[item[keyField]] = item;
-                return obj;
-            }, {})
+        const dataObjectified = data.reduceRight((obj, item) =>
+        {
+            //if it already existed in our old data, keep the old one in case the user modified it
+            if (this.state.data.hasOwnProperty(item["timestamp"]))
+                obj[item["timestamp"]] = this.state.data[item["timestamp"]]; //return the previous object with this timestamp
+            //else just get the new data
+            else
+                obj[item["timestamp"]] = item;
+            return obj;
+        }, {})
 
-        const formatedData = arrayToObject(data, "timestamp");
 
-        this.setState({ data: formatedData, isLoading: false })
+        this.setState({ data: dataObjectified, isLoading: false })
     }
 
     fetchWithRetry(url, limit, successCallback) // mainly used to wait for the server to boot, so he can send 20 stocks
@@ -76,22 +76,26 @@ export default class Home extends React.Component
                 if (data.length === NB_COUNT)
                     successCallback(data);
                 else if ((data.length < NB_COUNT) && limit) //try again until we have the number of stocks expected or we reach the limit
-                    setTimeout(() =>
-                    {
-                        return this.fetchWithRetry(url, --limit, successCallback);
-                    }, 1000);
+                {
+                    this.setState({ nbFetched: data.length }, () =>
+                        setTimeout(() =>
+                        {
+                            return this.fetchWithRetry(url, --limit, successCallback);
+                        }, 1000)
+                    );
+                }
                 else
                     throw new Error('Couldn\'t get ' + NB_COUNT + ' stocks, maximum number of retries reached');
             })
             .catch(error => this.setState({ error, isLoading: false }));
     }
 
-    onCellUpdate({ target: { value } }, { timestamp, type })
+    onCellUpdate({ timestamp, type, value })
     {
         if (this.state.data.hasOwnProperty(timestamp))
         {
             let clonedData = JSON.parse(JSON.stringify(this.state.data)); //copy
-            clonedData[timestamp].stocks[type] = parseInt(value, 10);
+            clonedData[timestamp].stocks[type] = value; //update data
             this.setState({ data: clonedData });
         }
     }
@@ -99,10 +103,27 @@ export default class Home extends React.Component
     render()
     {
         if (this.state.isLoading)
-            return <p>Loading {NB_COUNT} stocks ...</p>;
+        {
+            return (
+                <div className="Home">
+                    <div className="Home-loading">
+                        <p>Loaded {this.state.nbFetched}/{NB_COUNT} stocks</p>
+                        <ReactLoading type="spin" color="#222" height={'100%'} width={'28px'} />
+                    </div>
+                </div>
+            );
+        }
 
         if (this.state.error)
-            return <p>{this.state.error.message}</p>;
+        {
+            return (
+                <div className="Home">
+                    <div className="Home-loading">
+                        <p>The following error occured : {this.state.error.message}</p>
+                    </div>
+                </div>
+            );
+        }
 
         return (
             <div className="Home">

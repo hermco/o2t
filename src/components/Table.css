@@ -7,10 +7,13 @@
     margin: auto;
 }
 
-.Table h1 {
+.Table-title {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.Table-title h2 {
+   margin-left: 10px;
 }
 
 

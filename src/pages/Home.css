@@ -15,3 +15,24 @@
 .Home-table {
     grid-area: table
 }
+
+.Home-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    margin-top: 40px;
+}
+
+.Home-loading p {
+    margin-right: 10px;
+}
+
+.Home-error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    margin-top: 40px;
+}
+

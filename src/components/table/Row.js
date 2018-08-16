@@ -10,7 +10,7 @@ export default class Row extends React.Component
 
         const { onCellUpdate, data, rowName } = this.props;
 
-        /* iterate over each stock and create a cell for each */
+        /* iterate over each stock and create a cell */
         let rowCells = [];
         Object.keys(data).forEach(key =>
         {

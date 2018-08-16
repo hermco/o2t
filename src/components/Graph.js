@@ -1,22 +1,12 @@
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import PropTypes from 'prop-types';
 import './Graph.css';
 
 export default class Graph extends React.Component
 {
     render()
     {
-        // const formatedData = this.props.data.map((entry) =>
-        // {
-        //     count++;
-        //     return {
-        //         XAxisName: count,
-        //         NASDAQ: entry.stocks.NASDAQ,
-        //         CAC40: entry.stocks.CAC40,
-        //     }
-        // });
-
-        /* create an array for the graph */
         const data = this.props.data;
         let graphData = [];
         let count = 0;
@@ -47,4 +37,9 @@ export default class Graph extends React.Component
 
     }
 }
+
+Graph.propTypes = {
+    data: PropTypes.object.isRequired,
+};
+
 

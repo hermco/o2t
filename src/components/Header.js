@@ -8,7 +8,7 @@ export default class Header extends Component
         return (
             <div className="Header">
                 <header className="Header-header">
-                    <h1 className="Header-title">One2Team technical test - Corentin Hermet</h1>
+                    <h1 className="Header-title">O2T- Corentin Hermet</h1>
                 </header>
             </div>
         );

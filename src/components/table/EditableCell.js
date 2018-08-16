@@ -1,51 +1,52 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Formsy from 'formsy-react';
+import FormsyInput from '../FormsyInput';
 import './EditableCell.css';
 
 export default class EditableCell extends React.Component
 {
-
     constructor(props)
     {
         super(props);
-        this.state = {
-            value: this.props.value.toFixed(2)
+
+        this.cellInfo = {
+            timestamp: this.props.timestamp,
+            type: this.props.type,
         };
 
-        this.handleKeyDown = this.handleKeyDown.bind(this);
-        this.handleChange = this.handleChange.bind(this);
+        this.handleValidSubmit = this.handleValidSubmit.bind(this);
     }
 
-    handleKeyDown(e, cellId)
+    handleValidSubmit({ FormsyInput })
     {
-        if (e.keyCode === 13) //enter key
-        {
-            this.props.onCellUpdate(e, cellId);
-        }
+        const updatedCellInfo = Object.assign(this.cellInfo, { value: parseFloat(FormsyInput) })
+        console.log('updatedCellInfo :', updatedCellInfo);
+        this.props.onCellUpdate(updatedCellInfo);
     }
-
-    handleChange({ target: { value } })
-    {
-        this.setState({ value: parseInt(value, 10)});
-    }
-
 
     render()
     {
-        const cellId = {
-            timestamp: this.props.timestamp,
-            type: this.props.type
-        };
-
         return (
             <td className="EditableCell-td">
-                <input className="EditableCell-input" type='text' id={this.props.id} value={this.state.value}
-                    onChange={this.handleChange} onKeyDown={(e) => this.handleKeyDown(e, cellId)} />
-            </td>
+                <Formsy onValidSubmit={this.handleValidSubmit}>
+                    <FormsyInput
+                        id={this.props.id}
+                        name="FormsyInput"
+                        validations={{ matchRegexp: /^[0-9]+(\.[0-9]+)?$/ }}
+                        validationError="This is not a valid decimal number"
+                        value={this.props.value.toFixed(2)}
+                        required
+                    />
+                    <button type="submit" disabled={false} style={{ display: 'none' }} />
+                </Formsy>
+            </td >
         );
 
     }
 }
+
+
 
 EditableCell.propTypes = {
     data: PropTypes.number,
