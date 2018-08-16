@@ -8,6 +8,8 @@ This exposes the following API : https://github.com/o2t/tutorial-node-stock-serv
 
 # Features 
 
+![Image of the UI](https://imgur.com/a/B3sdcdM.jpg)
+
     - Visualize data through a nice dynamic graph
     - Data is refreshed every second
     - Data is editable on the fly through the table displayed below the graph. Simply click on a cell, edit, and press Enter. The graph updates iteself
