@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Formsy from 'formsy-react';
-import FormsyInput from '../FormsyInput';
+import FormsyInput from '../../../components/FormsyInput';
 import './EditableCell.css';
 
-export default class EditableCell extends React.Component
+export default class EditableCell extends Component
 {
     constructor(props)
     {

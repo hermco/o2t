@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import PropTypes from 'prop-types';
 import './Graph.css';
 
-export default class Graph extends React.Component
+export default class Graph extends Component
 {
     render()
     {

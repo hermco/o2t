@@ -1,13 +1,13 @@
-import React from 'react';
-import Graph from '../components/Graph';
-import Table from '../components/Table';
+import React, { Component } from 'react';
+import Graph from './home/Graph';
+import Table from './home/Table';
 import ReactLoading from 'react-loading';
 import "./Home.css";
 
 const API_URL = "http://127.0.0.1:8000/?count=";
 const NB_COUNT = 20;
 
-export default class Home extends React.Component
+export default class Home extends Component
 {
     constructor(props)
     {

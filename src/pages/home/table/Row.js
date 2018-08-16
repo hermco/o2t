@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import EditableCell from './EditableCell'
 
 
-export default class Row extends React.Component
+export default class Row extends Component
 {
     render()
     {

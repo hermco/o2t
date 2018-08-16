@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Row from './table/Row';
 import { Table as BootStrapTable } from 'react-bootstrap';
 import './Table.css';
 
-export default class Table extends React.Component
+export default class Table extends Component
 {
     render()
     {
