@@ -8,7 +8,7 @@ This exposes the following API : https://github.com/o2t/tutorial-node-stock-serv
 
 # Features 
 
-![Image of the UI](https://imgur.com/a/B3sdcdM.jpg)
+![Image of the UI](https://i.imgur.com/SWYafot.png)
 
     - Visualize data through a nice dynamic graph
     - Data is refreshed every second
